@@ -34,12 +34,33 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.2</version>
+			<scope>provided</scope>
+		</dependency>
 
 		<!--netty-->
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-all</artifactId>
-			<version>4.1.39.Final</version>
+			<version>5.0.0.Alpha1</version>
+			<!--<version>4.1.39.Final</version>-->
+		</dependency>
+
+		<!--msgpack 编解码-->
+		<dependency>
+			<groupId>org.msgpack</groupId>
+			<artifactId>msgpack</artifactId>
+			<version>0.6.12</version>
+		</dependency>
+
+		<!--protobuf-->
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<version>2.5.0</version>
 		</dependency>
 	</dependencies>
 

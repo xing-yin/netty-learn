@@ -60,7 +60,7 @@ public final class EchoServer {
              .childOption(ChannelOption.SO_KEEPALIVE, true)
              .childOption(NioChannelOption.SO_KEEPALIVE, true)
 
-              //切换到unpooled的方式之一
+              //切换到 unpooled 的方式之一
              .childOption(ChannelOption.ALLOCATOR, UnpooledByteBufAllocator.DEFAULT)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                  @Override
