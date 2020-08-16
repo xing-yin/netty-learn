@@ -10,11 +10,13 @@ import io.netty.handler.timeout.IdleStateEvent;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+// 没有特殊资源可以共享
 @ChannelHandler.Sharable
 public class KeepaliveHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        //
         if (evt == IdleStateEvent.FIRST_WRITER_IDLE_STATE_EVENT) {
             log.info("write idle happen. so need to send keepalive to keep connection not closed by server");
             KeepaliveOperation keepaliveOperation = new KeepaliveOperation();

@@ -7,7 +7,10 @@ import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.example.study.client.codec.*;
+import io.netty.example.study.common.RequestMessage;
+import io.netty.example.study.common.auth.AuthOperation;
 import io.netty.example.study.common.order.OrderOperation;
+import io.netty.example.study.util.IdUtil;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
@@ -61,8 +64,10 @@ public class ClientV1 {
 
             channelFuture.sync();
 
-            OrderOperation orderOperation = new OrderOperation(1001, "tudou");
+            AuthOperation authOperation = new AuthOperation("admin", "password");
+            channelFuture.channel().writeAndFlush(new RequestMessage(IdUtil.nextId(), authOperation));
 
+            OrderOperation orderOperation = new OrderOperation(1001, "tudou");
             channelFuture.channel().writeAndFlush(orderOperation);
 
             channelFuture.channel().closeFuture().sync();

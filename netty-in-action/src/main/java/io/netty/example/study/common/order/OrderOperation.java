@@ -24,7 +24,9 @@ public class OrderOperation extends Operation {
     public OrderOperationResult execute() {
         log.info("order's executing startup with orderRequest: " + toString());
         //execute order logic
+        // 模拟 IO 密集型
         Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
+
         log.info("order's executing complete");
         OrderOperationResult orderResponse = new OrderOperationResult(tableId, dish, true);
         return orderResponse;
