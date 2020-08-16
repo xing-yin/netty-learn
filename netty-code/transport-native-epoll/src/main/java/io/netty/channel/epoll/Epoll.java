@@ -36,6 +36,7 @@ public final class Epoll {
             FileDescriptor epollFd = null;
             FileDescriptor eventFd = null;
             try {
+                // 触发 Native 加载
                 epollFd = Native.newEpollCreate();
                 eventFd = Native.newEventFd();
             } catch (Throwable t) {

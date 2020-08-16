@@ -51,7 +51,7 @@ public final class Native {
         try {
             // First, try calling a side-effect free JNI method to see if the library was already
             // loaded by the application.
-            //调用一个轻量级操作测试下是否加载过了，加载过了，就不用重复加载了
+            // 调用一个轻量级操作测试下是否加载过了，加载过了，就不用重复加载了
             offsetofEpollData();
         } catch (UnsatisfiedLinkError ignore) {
             // The library was not previously loaded, load it now.
