@@ -52,7 +52,7 @@ public abstract class AbstractRemoteAddressFilter<T extends SocketAddress> exten
         }
     }
 
-    //判断连接的远程地址是否符合需求，不符合断掉。
+    // 判断连接的远程地址是否符合需求，不符合断掉。
     private boolean handleNewChannel(ChannelHandlerContext ctx) throws Exception {
         @SuppressWarnings("unchecked")
         T remoteAddress = (T) ctx.channel().remoteAddress();

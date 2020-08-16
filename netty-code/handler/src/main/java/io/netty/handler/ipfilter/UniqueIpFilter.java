@@ -33,6 +33,9 @@ import java.util.Set;
 @ChannelHandler.Sharable
 public class UniqueIpFilter extends AbstractRemoteAddressFilter<InetSocketAddress> {
 
+    /**
+     * 一个 ip 只能建立一个连接（使用 set 实现）
+     */
     private final Set<InetAddress> connected = new ConcurrentSet<InetAddress>();
 
     @Override
@@ -42,7 +45,7 @@ public class UniqueIpFilter extends AbstractRemoteAddressFilter<InetSocketAddres
         if (!connected.add(remoteIp)) {
             return false;
         } else {
-            //连接关闭时，从connected中移除掉remote ip
+            // 连接关闭时，从connected中移除掉remote ip
             ctx.channel().closeFuture().addListener(new ChannelFutureListener() {
                 @Override
                 public void operationComplete(ChannelFuture future) throws Exception {

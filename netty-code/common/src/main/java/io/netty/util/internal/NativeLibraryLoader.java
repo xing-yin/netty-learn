@@ -134,7 +134,7 @@ public final class NativeLibraryLoader {
         List<Throwable> suppressed = new ArrayList<Throwable>();
         try {
             // first try to load from java.library.path
-            //相对路径加载
+            // 相对路径加载
             loadLibrary(loader, name, false);
             return;
         } catch (Throwable ex) {
@@ -158,7 +158,7 @@ public final class NativeLibraryLoader {
         }
         try {
             if (url == null) {
-                //MAC系统
+                // MAC系统
                 if (PlatformDependent.isOsx()) {
                     String fileName = path.endsWith(".jnilib") ? NATIVE_RESOURCE_HOME + "lib" + name + ".dynlib" :
                             NATIVE_RESOURCE_HOME + "lib" + name + ".jnilib";
@@ -173,7 +173,7 @@ public final class NativeLibraryLoader {
                         throw fnf;
                     }
                 } else {
-                    //linux等系统下，不尝试再找了，直接报错
+                    // linux等系统下，不尝试再找了，直接报错
                     FileNotFoundException fnf = new FileNotFoundException(path);
                     ThrowableUtil.addSuppressedAndClear(fnf, suppressed);
                     throw fnf;
@@ -184,12 +184,12 @@ public final class NativeLibraryLoader {
             String prefix = libname.substring(0, index);
             String suffix = libname.substring(index);
 
-            //创建临时文件
+            // 创建临时文件
             tmpFile = File.createTempFile(prefix, suffix, WORKDIR);
             in = url.openStream();
             out = new FileOutputStream(tmpFile);
 
-            //把META-INF/native/下的库复制成临时文件
+            // 把META-INF/native/下的库复制成临时文件
             if (shouldShadedLibraryIdBePatched(packagePrefix)) {
                 patchShadedLibraryId(in, out, originalName, name);
             } else {

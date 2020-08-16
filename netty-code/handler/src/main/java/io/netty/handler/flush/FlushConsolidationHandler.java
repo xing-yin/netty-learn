@@ -122,7 +122,7 @@ public class FlushConsolidationHandler extends ChannelDuplexHandler {
 
     //
     //同步：           read ->  writeAndFlush -> readComplete
-    //异步：           read ->  readComplete  -> writeAndFlush
+    //异步：           read ->  readComplete  -> writeAndFlush 或 read ->  writeAndFlush -> readComplete
     //ReadInProgress  000001111111111111111111110000000000000
     //                000001111000000000000000000000000000000
     @Override
@@ -146,6 +146,7 @@ public class FlushConsolidationHandler extends ChannelDuplexHandler {
             if (++flushPendingCount == explicitFlushAfterFlushes) {
                 flushNow(ctx);
             } else {
+                // 在定时刷新期间，如果满足条件就能继续走 flushNow(ctx) 方法
                 scheduleFlush(ctx);
             }
         } else {

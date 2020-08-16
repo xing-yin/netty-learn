@@ -45,6 +45,7 @@ public class RuleBasedIpFilter extends AbstractRemoteAddressFilter<InetSocketAdd
 
     @Override
     protected boolean accept(ChannelHandlerContext ctx, InetSocketAddress remoteAddress) throws Exception {
+        // 基于规则接收连接
         for (IpFilterRule rule : rules) {
             if (rule == null) {
                 break;

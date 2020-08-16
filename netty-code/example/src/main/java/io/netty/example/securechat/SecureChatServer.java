@@ -35,6 +35,9 @@ public final class SecureChatServer {
 
     public static void main(String[] args) throws Exception {
         SelfSignedCertificate ssc = new SelfSignedCertificate();
+        // 打印自签名证书
+        // /var/folders/zv/8lg3vd5x6z9877qzv5nm1wh40000gn/T/keyutil_example.com_295961751282392335.crt
+        // /var/folders/zv/8lg3vd5x6z9877qzv5nm1wh40000gn/T/keyutil_example.com_4227137541584848963.key
         System.out.println(ssc.certificate());
         System.out.println(ssc.privateKey());
 
