@@ -19,7 +19,7 @@ public class TimeServer {
             }
         }
 
-        // 创建多路复用类，是一个独立线程，负责轮询多路复用器 selectorr,可以处理多个客户端的并发接入
+        // 创建多路复用类，是一个独立线程，负责轮询多路复用器 selector,可以处理多个客户端的并发接入
         MultiplexerTimeServer timeServer = new MultiplexerTimeServer(port);
         new Thread(timeServer, "NIO-MultiplexerTimeServer_001").start();
     }

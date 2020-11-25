@@ -6,6 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -128,7 +129,7 @@ public class TimeClientHandler implements Runnable {
                 if (readBytes > 0) {
                     byte[] bytes = new byte[readBuffer.remaining()];
                     readBuffer.get(bytes);
-                    String body = new String(bytes, "UTF-8");
+                    String body = new String(bytes, StandardCharsets.UTF_8);
                     System.out.println("The time server receive order : " + body);
                     this.stop = true;
                 } else if (readBytes < 0) {

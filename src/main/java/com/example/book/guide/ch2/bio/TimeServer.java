@@ -29,7 +29,7 @@ public class TimeServer {
             serverSocket = new ServerSocket(port);
             System.out.println("The time server is start in port:" + port);
             Socket socket = null;
-            // 无限循环监听客户端连接：若没有连接，主线程阻塞在 serverSocket 的 accept 操作上
+            // 无限循环监听客户端连接：若没有连接，主线程阻塞在 serverSocket 的 accept 操作上，等待客户端发送请求
             while (true) {
                 socket = serverSocket.accept();
                 new Thread(new TimeServerHandler(socket)).start();
@@ -44,3 +44,8 @@ public class TimeServer {
     }
 
 }
+
+/**
+ * 性能瓶颈分析
+ * tcp 连接中存在阻塞的点有: accept、connect、read、write
+ */

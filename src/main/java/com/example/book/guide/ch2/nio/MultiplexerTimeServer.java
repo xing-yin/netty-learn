@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -107,7 +108,7 @@ public class MultiplexerTimeServer implements Runnable {
                 sc.register(selector, SelectionKey.OP_READ);
             }
 
-            // 111-137: 赌球客户端请求消息，首先创建一个 ByteBuffer(此处为 1M）缓冲区。
+            // 111-137: 读取客户端请求消息，首先创建一个 ByteBuffer(此处为 1M）缓冲区。
             // 然后调用 SocketChannel 的 read 方法读取请求码流。
             // 注意！由于 SocketChannel 已设为异步非阻塞，因此它的 read 非阻塞。使用返回值判断，看读到的字节数，有 3种可能：
             // a.返回值>0:读到了字节，对字节进行编解码
@@ -126,7 +127,7 @@ public class MultiplexerTimeServer implements Runnable {
                     readBuffer.flip();
                     byte[] bytes = new byte[readBuffer.remaining()];
                     readBuffer.get(bytes);
-                    String body = new String(bytes, "UTF-8");
+                    String body = new String(bytes, StandardCharsets.UTF_8);
                     System.out.println("The time server receive order : " + body);
                     String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body)
                             ? new java.util.Date(System.currentTimeMillis()).toString()

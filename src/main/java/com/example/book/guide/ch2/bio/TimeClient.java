@@ -36,7 +36,7 @@ public class TimeClient {
             in = new BufferedReader(new InputStreamReader(
                     socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
-            // 向服务端发送"QUERY TIME ORDER"，然后通过 BufferedReader 的readLine 读取响应并打印
+            // 向服务端发送"QUERY TIME ORDER"，然后通过 BufferedReader 的 readLine 读取响应并打印
             out.println("QUERY TIME ORDER");
             System.out.println("Send order 2 server succeed.");
             String resp = in.readLine();
